@@ -1,0 +1,5 @@
+.at-ripple { position: relative; isolation: isolate; }
+.at-ripple__layer { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.at-ripple__wave { position: absolute; border-radius: 50%; background: var(--at-ripple-color, currentColor); opacity: 0; transform: translate(-50%, -50%) scale(0); animation: at-ripple-wave var(--at-ripple-duration, 550ms) ease-out; }
+@keyframes at-ripple-wave { from { opacity: .28; transform: translate(-50%, -50%) scale(0); } to { opacity: 0; transform: translate(-50%, -50%) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .at-ripple__wave { display: none; animation: none; } }

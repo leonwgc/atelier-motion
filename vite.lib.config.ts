@@ -34,6 +34,11 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(process.cwd(), 'src/index.ts'),
+        'auto-size': resolve(process.cwd(), 'src/entries/auto-size.ts'),
+        'layout-list': resolve(process.cwd(), 'src/entries/layout-list.ts'),
+        'ripple': resolve(process.cwd(), 'src/entries/ripple.ts'),
+        'text-rotate': resolve(process.cwd(), 'src/entries/text-rotate.ts'),
+
         'border-beam': resolve(process.cwd(), 'src/entries/border-beam.ts'),
         'marquee': resolve(process.cwd(), 'src/entries/marquee.ts'),
         'number-ticker': resolve(process.cwd(), 'src/entries/number-ticker.ts'),

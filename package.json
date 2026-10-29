@@ -153,7 +153,27 @@
     },
     "./theme.css": "./dist/theme.css",
     "./package.json": "./package.json",
-    "./styles/*.css": "./dist/*.css"
+    "./styles/*.css": "./dist/*.css",
+    "./auto-size": {
+      "types": "./dist/entries/auto-size.d.ts",
+      "import": "./dist/auto-size.js",
+      "require": "./dist/auto-size.cjs"
+    },
+    "./layout-list": {
+      "types": "./dist/entries/layout-list.d.ts",
+      "import": "./dist/layout-list.js",
+      "require": "./dist/layout-list.cjs"
+    },
+    "./ripple": {
+      "types": "./dist/entries/ripple.d.ts",
+      "import": "./dist/ripple.js",
+      "require": "./dist/ripple.cjs"
+    },
+    "./text-rotate": {
+      "types": "./dist/entries/text-rotate.d.ts",
+      "import": "./dist/text-rotate.js",
+      "require": "./dist/text-rotate.cjs"
+    }
   },
   "sideEffects": [
     "**/*.css"

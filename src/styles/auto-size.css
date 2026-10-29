@@ -1,0 +1,3 @@
+.at-auto-size { transition: height var(--at-auto-size-duration, 250ms) var(--at-ease-standard); overflow: hidden; }
+.at-auto-size__content { display: flow-root; }
+@media (prefers-reduced-motion: reduce) { .at-auto-size { transition: none; } }

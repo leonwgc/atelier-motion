@@ -1,6 +1,6 @@
 # Atelier Motion
 
-从 `atelier-ui` 抽离的独立 React 动画组件库，包含 24 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
+从 `atelier-ui` 抽离的独立 React 动画组件库，包含 28 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
 
 ## 开发
 
@@ -62,6 +62,10 @@ import 'atelier-motion/styles/fade-in.css'; // 对应 dist/fade-in.css
 
 | 组件 | 按需入口 | 用途 |
 | --- | --- | --- |
+| AutoSize | `atelier-motion/auto-size` | 内容变化时平滑调整高度 |
+| LayoutList | `atelier-motion/layout-list` | 纵向列表排序与增删位置动画 |
+| Ripple | `atelier-motion/ripple` | 点击位置或键盘中心涟漪 |
+| TextRotate | `atelier-motion/text-rotate` | 自动或受控的整句文案轮换 |
 | AnimatedList | `atelier-motion/animated-list` | 列表交错渐入 |
 | BlurFade | `atelier-motion/blur-fade` | 模糊渐入 |
 | BorderBeam | `atelier-motion/border-beam` | 边框流光 |
@@ -114,3 +118,12 @@ npm publish --access public
 ## 迁移
 
 原组件调用方式不变，将导入包名从 `atelier-ui` 换为 `atelier-motion` 即可。原始 `atelier-ui` 仓库在本次抽离中未修改，现有消费者可逐步迁移。
+
+## 内容与布局动画
+
+- `AutoSize` 用 `ResizeObserver` 测量内部自然高度，包括异步内容和换行变化。不要给外层设置固定高度，内容的留白应放在子元素中。不支持该 API 的环境保留自然高度。
+- `LayoutList` 通过 `getItemKey` 识别唯一、稳定的列表项，平滑移动纵向列表中的保留项。新增项立即显示，删除项立即移除；不包含拖拽、网格或退场保留。动画由组件管理列表项的 transform，请把自定义变换放在子元素上。不支持 Web Animations API 时直接更新布局。
+- `Ripple` 只接受一个原生 `button` 或 `a`，保留原元素的 ref、事件与属性。使用常规 children 内容，不支持 dangerouslySetInnerHTML。原生禁用、aria-disabled、主动关闭或减少动态效果时不播放涟漪；`Ripple.disabled` 只关闭效果，不禁用链接导航或按钮操作。调用方阻止默认事件时不播放涟漪。
+- `TextRotate` 默认每 2400ms 自动切换整句文案，可用 `paused`、`autoPlay` 控制；悬停与焦点暂停可避免干扰阅读。传入 `index` 后改为外部驱动，自动计时停止，`onIndexChange` 仅报告内部自动切换。索引循环归一化，空数组显示空内容，单条文案不创建计时器。辅助技术只读取当前文案，默认不主动播报；减少动态效果时保持切换并去除动画。
+
+四个组件的 `duration` 与 `TextRotate.interval` 单位均为毫秒。无效时长回退到默认值，负时长视为零；`interval` 最小为 100ms。

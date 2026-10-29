@@ -1,11 +1,12 @@
 import { useState, type ReactNode } from 'react';
 import { highlightCode } from './highlightCode';
+import { newAnimationPages } from './NewAnimationPages';
 import { AnimatedList, BlurFade, BorderBeam, Confetti, Expand, FadeIn, FlipCard, FlipIn, Glow, HoverLift, Marquee, NumberTicker, Press, Pulse, ScaleIn, ScrollReveal, Shake, Shimmer, SlideIn, Stagger, Transition, TransitionGroup, TypingAnimation, Wobble } from 'atelier-motion';
 
-export type AnimationPageId = 'marquee' | 'numberTicker' | 'typingAnimation' | 'blurFade' | 'fadeIn' | 'slideIn' | 'scrollReveal' | 'scaleIn' | 'stagger' | 'expand' | 'pulse' | 'glow' | 'shake' | 'wobble' | 'hoverLift' | 'press' | 'flipIn' | 'flipCard' | 'confetti' | 'shimmer' | 'animatedList' | 'transition' | 'transitionGroup' | 'borderBeam';
+export type AnimationPageId = 'marquee' | 'numberTicker' | 'typingAnimation' | 'blurFade' | 'fadeIn' | 'slideIn' | 'scrollReveal' | 'scaleIn' | 'stagger' | 'expand' | 'pulse' | 'glow' | 'shake' | 'wobble' | 'hoverLift' | 'press' | 'flipIn' | 'flipCard' | 'confetti' | 'shimmer' | 'animatedList' | 'transition' | 'transitionGroup' | 'borderBeam' | 'autoSize' | 'layoutList' | 'ripple' | 'textRotate';
 type ApiRow = [string, string, string];
 
-interface AnimationPageMeta {
+export interface AnimationPageMeta {
   id: AnimationPageId;
   title: string;
   icon: string;
@@ -37,6 +38,7 @@ function ExpandPreview() {
 }
 
 export const animationPages: AnimationPageMeta[] = [
+  ...newAnimationPages,
   {
     id: 'marquee', title: 'Marquee 滚动展示', icon: '⇢', description: '以连续循环的轨道展示标签、动态或品牌内容。',
     code: `import { Marquee } from 'atelier-motion/marquee';
