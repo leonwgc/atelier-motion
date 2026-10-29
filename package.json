@@ -173,6 +173,21 @@
       "types": "./dist/entries/text-rotate.d.ts",
       "import": "./dist/text-rotate.js",
       "require": "./dist/text-rotate.cjs"
+    },
+    "./scroll-progress": {
+      "types": "./dist/entries/scroll-progress.d.ts",
+      "import": "./dist/scroll-progress.js",
+      "require": "./dist/scroll-progress.cjs"
+    },
+    "./tilt": {
+      "types": "./dist/entries/tilt.d.ts",
+      "import": "./dist/tilt.js",
+      "require": "./dist/tilt.cjs"
+    },
+    "./spotlight": {
+      "types": "./dist/entries/spotlight.d.ts",
+      "import": "./dist/spotlight.js",
+      "require": "./dist/spotlight.cjs"
     }
   },
   "sideEffects": [

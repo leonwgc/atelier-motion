@@ -34,6 +34,10 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(process.cwd(), 'src/index.ts'),
+        'scroll-progress': resolve(process.cwd(), 'src/entries/scroll-progress.ts'),
+        'tilt': resolve(process.cwd(), 'src/entries/tilt.ts'),
+        'spotlight': resolve(process.cwd(), 'src/entries/spotlight.ts'),
+
         'auto-size': resolve(process.cwd(), 'src/entries/auto-size.ts'),
         'layout-list': resolve(process.cwd(), 'src/entries/layout-list.ts'),
         'ripple': resolve(process.cwd(), 'src/entries/ripple.ts'),

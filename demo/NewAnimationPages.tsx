@@ -3,6 +3,10 @@ import { AutoSize } from 'atelier-motion/auto-size';
 import { LayoutList } from 'atelier-motion/layout-list';
 import { Ripple } from 'atelier-motion/ripple';
 import { TextRotate } from 'atelier-motion/text-rotate';
+import { ScrollProgress } from 'atelier-motion/scroll-progress';
+import { Tilt } from 'atelier-motion/tilt';
+import { Spotlight } from 'atelier-motion/spotlight';
+import { useRef } from 'react';
 import type { AnimationPageMeta } from './AnimationPages';
 
 function AutoSizeDemo() {
@@ -72,7 +76,50 @@ function TextRotateDemo() {
   </div>;
 }
 
+function ScrollProgressDemo() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  return <div className="motion-demo"><ScrollProgress containerRef={containerRef} aria-label="示例阅读进度" /><div ref={containerRef} className="motion-demo__scroll" tabIndex={0} aria-label="可滚动示例内容">{Array.from({ length: 12 }, (_, index) => <p key={index}>阅读内容 {index + 1}：向下滚动查看进度。</p>)}</div></div>;
+}
+
 export const newAnimationPages: AnimationPageMeta[] = [
+  {
+    id: 'scrollProgress', title: 'ScrollProgress 阅读进度', icon: '▰', description: '跟随页面或指定容器滚动，显示连续阅读进度。', preview: <ScrollProgressDemo />,
+    code: `import { useRef } from 'react';
+import { ScrollProgress } from 'atelier-motion/scroll-progress';
+
+export function ReadingPanel() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  return <div>
+    <ScrollProgress containerRef={containerRef} aria-label="阅读进度" />
+    <div ref={containerRef} style={{ height: 200, overflowY: 'auto' }}>
+      <p>第一段内容</p><p>第二段内容</p><p>第三段内容</p>
+    </div>
+  </div>;
+}`,
+    rows: [['containerRef', 'RefObject<HTMLElement>', 'window'], ['position', "'top' | 'bottom'", 'top'], ['color', 'string', '主题主色'], ['height', 'number', '3 px'], ['aria-label', 'string', 'Scroll progress']],
+  },
+  {
+    id: 'tilt', title: 'Tilt 指针倾斜', icon: '◇', description: '卡片随指针位置轻微倾斜，离开后复位。', preview: <Tilt className="motion-demo__feature"><strong>Move your pointer</strong><p>光标经过卡片时观察角度变化。</p></Tilt>,
+    code: `import { Tilt } from 'atelier-motion/tilt';
+
+export function FeatureCard() {
+  return <Tilt maxAngle={8} perspective={800}>
+    <article><h2>Explore the details</h2><p>Move your pointer over this card.</p></article>
+  </Tilt>;
+}`,
+    rows: [['children', 'ReactNode', 'required'], ['maxAngle', 'number', '8°'], ['perspective', 'number', '800 px'], ['disabled', 'boolean', 'false']],
+  },
+  {
+    id: 'spotlight', title: 'Spotlight 指针光效', icon: '✺', description: '柔和光斑跟随指针位置，突出卡片内容。', preview: <Spotlight className="motion-demo__feature"><strong>Follow the light</strong><p>光斑始终跟随指针。</p></Spotlight>,
+    code: `import { Spotlight } from 'atelier-motion/spotlight';
+
+export function HighlightCard() {
+  return <Spotlight color="rgb(104 92 246 / 18%)" radius={180}>
+    <article><h2>Featured</h2><p>Follow the light.</p></article>
+  </Spotlight>;
+}`,
+    rows: [['children', 'ReactNode', 'required'], ['color', 'string', '半透明主色'], ['radius', 'number', '180 px'], ['disabled', 'boolean', 'false']],
+  },
   {
     id: 'autoSize', title: 'AutoSize 自动高度', icon: '↕',
     description: '内容高度改变时平滑调整容器尺寸，适合异步结果和动态表单；不控制内容显隐。',
@@ -167,6 +214,10 @@ export function ActionButton() {
     preview: <TextRotateDemo />,
     code: `import { useState } from 'react';
 import { TextRotate } from 'atelier-motion/text-rotate';
+import { ScrollProgress } from 'atelier-motion/scroll-progress';
+import { Tilt } from 'atelier-motion/tilt';
+import { Spotlight } from 'atelier-motion/spotlight';
+import { useRef } from 'react';
 
 export function RotatingHeadline() {
   const [paused, setPaused] = useState(false);

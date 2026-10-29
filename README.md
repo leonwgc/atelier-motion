@@ -1,6 +1,6 @@
 # Atelier Motion
 
-从 `atelier-ui` 抽离的独立 React 动画组件库，包含 28 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
+从 `atelier-ui` 抽离的独立 React 动画组件库，包含 31 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
 
 ## 开发
 
@@ -62,6 +62,9 @@ import 'atelier-motion/styles/fade-in.css'; // 对应 dist/fade-in.css
 
 | 组件 | 按需入口 | 用途 |
 | --- | --- | --- |
+| ScrollProgress | `atelier-motion/scroll-progress` | 页面或容器阅读进度 |
+| Tilt | `atelier-motion/tilt` | 指针倾斜反馈 |
+| Spotlight | `atelier-motion/spotlight` | 指针跟随光效 |
 | AutoSize | `atelier-motion/auto-size` | 内容变化时平滑调整高度 |
 | LayoutList | `atelier-motion/layout-list` | 纵向列表排序与增删位置动画 |
 | Ripple | `atelier-motion/ripple` | 点击位置或键盘中心涟漪 |

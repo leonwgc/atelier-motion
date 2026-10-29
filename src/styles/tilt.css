@@ -1,0 +1,3 @@
+.at-tilt { perspective: var(--at-tilt-perspective, 800px); }
+.at-tilt__inner { transform-style: preserve-3d; transition: transform 160ms var(--at-ease-standard); }
+@media (prefers-reduced-motion: reduce) { .at-tilt__inner { transform: none !important; transition: none; } }

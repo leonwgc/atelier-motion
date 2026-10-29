@@ -1,0 +1,4 @@
+.at-spotlight { position: relative; isolation: isolate; overflow: hidden; }
+.at-spotlight::before { content: ''; position: absolute; z-index: -1; inset: 0; opacity: 0; pointer-events: none; background: radial-gradient(circle var(--at-spotlight-radius, 180px) at var(--at-spotlight-x, 50%) var(--at-spotlight-y, 50%), var(--at-spotlight-color), transparent); transition: opacity 180ms var(--at-ease-standard); }
+.at-spotlight:hover:not([data-disabled])::before { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .at-spotlight::before { display: none; } }

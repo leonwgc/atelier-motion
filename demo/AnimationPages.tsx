@@ -3,7 +3,7 @@ import { highlightCode } from './highlightCode';
 import { newAnimationPages } from './NewAnimationPages';
 import { AnimatedList, BlurFade, BorderBeam, Confetti, Expand, FadeIn, FlipCard, FlipIn, Glow, HoverLift, Marquee, NumberTicker, Press, Pulse, ScaleIn, ScrollReveal, Shake, Shimmer, SlideIn, Stagger, Transition, TransitionGroup, TypingAnimation, Wobble } from 'atelier-motion';
 
-export type AnimationPageId = 'marquee' | 'numberTicker' | 'typingAnimation' | 'blurFade' | 'fadeIn' | 'slideIn' | 'scrollReveal' | 'scaleIn' | 'stagger' | 'expand' | 'pulse' | 'glow' | 'shake' | 'wobble' | 'hoverLift' | 'press' | 'flipIn' | 'flipCard' | 'confetti' | 'shimmer' | 'animatedList' | 'transition' | 'transitionGroup' | 'borderBeam' | 'autoSize' | 'layoutList' | 'ripple' | 'textRotate';
+export type AnimationPageId = 'marquee' | 'numberTicker' | 'typingAnimation' | 'blurFade' | 'fadeIn' | 'slideIn' | 'scrollReveal' | 'scaleIn' | 'stagger' | 'expand' | 'pulse' | 'glow' | 'shake' | 'wobble' | 'hoverLift' | 'press' | 'flipIn' | 'flipCard' | 'confetti' | 'shimmer' | 'animatedList' | 'transition' | 'transitionGroup' | 'borderBeam' | 'autoSize' | 'layoutList' | 'ripple' | 'textRotate' | 'scrollProgress' | 'tilt' | 'spotlight';
 type ApiRow = [string, string, string];
 
 export interface AnimationPageMeta {

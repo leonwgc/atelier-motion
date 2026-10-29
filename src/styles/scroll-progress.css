@@ -1,0 +1,4 @@
+.at-scroll-progress { position: sticky; z-index: 10; top: 0; height: var(--at-scroll-progress-height, 3px); pointer-events: none; }
+.at-scroll-progress--bottom { top: auto; bottom: 0; }
+.at-scroll-progress__bar { display: block; width: 100%; height: 100%; background: var(--at-scroll-progress-color); transform: scaleX(var(--at-scroll-progress-scale, 0)); transform-origin: left; transition: var(--at-scroll-progress-transition, transform 80ms linear); }
+@media (prefers-reduced-motion: reduce) { .at-scroll-progress__bar { transition: none; } }

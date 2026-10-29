@@ -119,3 +119,23 @@ footer { padding-top: 40px; margin-top: 40px; border-top: 1px solid #e7e3ef; col
 .motion-demo .motion-demo__note { margin: 0; color: var(--at-color-subtle); font-size: 12px; line-height: 1.8; }
 .motion-demo__text { min-height: 64px; color: var(--at-color-primary); font-size: clamp(18px, 3vw, 28px); }
 .motion-demo button:disabled { cursor: not-allowed; opacity: .5; }
+.topbar__right { display: flex; align-items: center; gap: 14px; }
+.search-trigger { display: inline-flex; align-items: center; gap: 12px; padding: 6px 10px; font-size: 14px; }
+.search-trigger span { color: #8a849e; font: 11px ui-monospace, monospace; }
+.search-dialog { width: min(540px, calc(100vw - 32px)); max-height: min(640px, calc(100vh - 40px)); margin: 12vh auto auto; border: 1px solid #e8e5f0; border-radius: 14px; padding: 18px; box-shadow: 0 24px 80px #24203a3d; }
+.search-dialog::backdrop { background: #20203891; }
+.search-dialog__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.search-dialog__header label { font-size: 15px; font-weight: 600; }
+.search-dialog__header button { border: 0; font-size: 20px; }
+.search-dialog__results { overflow-y: auto; max-height: min(410px, 55vh); margin-top: 12px; }
+.search-dialog__results button { display: flex; align-items: flex-start; width: 100%; gap: 12px; border: 0; text-align: left; }
+.search-dialog__results button[aria-selected='true'] { background: #f0edff; }
+.search-dialog__results button > span:first-child { min-width: 24px; }
+.search-dialog__results strong { display: block; color: #5146bf; font-size: 13px; }
+.search-dialog__results small { display: block; margin-top: 3px; color: #7d7891; line-height: 1.5; }
+.search-dialog__hint { margin-bottom: 0; color: #9993a6; font-size: 11px; }
+@media (max-width: 760px) { .topbar__right { margin-left: auto; } .search-trigger span { display: none; } }
+.motion-demo__scroll { height: 210px; overflow-y: auto; border: 1px solid var(--at-color-border); border-radius: 8px; padding: 0 20px; }
+.motion-demo__scroll p { padding: 12px; border-bottom: 1px solid var(--at-color-border); }
+.motion-demo__feature { max-width: 440px; border: 1px solid var(--at-color-border); border-radius: 12px; padding: 28px; background: #faf9ff; }
+.motion-demo__feature p { margin: 12px 0 0; color: var(--at-color-subtle); }
