@@ -24,7 +24,7 @@
     "typescript": "^5.8.2",
     "vite": "^8.3.5"
   },
-  "description": "Standalone React motion components extracted from atelier-ui.",
+  "description": "A lightweight React animation component library with TypeScript support, individual component imports, and reduced-motion accessibility.",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
