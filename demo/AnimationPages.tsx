@@ -2,7 +2,8 @@ import { useState, type ReactNode } from 'react';
 import { highlightCode } from './highlightCode';
 import { newAnimationPages } from './NewAnimationPages';
 import { moreAnimationPages } from './MoreAnimationPages';
-import { AnimatedList, BlurFade, BorderBeam, Confetti, Expand, FadeIn, FlipCard, FlipIn, Glow, HoverLift, Marquee, NumberTicker, Press, Pulse, ScaleIn, ScrollReveal, Shake, Shimmer, SlideIn, Stagger, Transition, TransitionGroup, TypingAnimation, Wobble } from 'atelier-motion';
+import { animationDemoPreviews } from './AnimationDemoPreviews';
+import { Expand, FlipCard, Transition, TransitionGroup } from 'atelier-motion';
 
 export type AnimationPageId = 'marquee' | 'numberTicker' | 'typingAnimation' | 'blurFade' | 'fadeIn' | 'slideIn' | 'scrollReveal' | 'scaleIn' | 'stagger' | 'expand' | 'pulse' | 'glow' | 'shake' | 'wobble' | 'hoverLift' | 'press' | 'flipIn' | 'flipCard' | 'confetti' | 'shimmer' | 'animatedList' | 'transition' | 'transitionGroup' | 'borderBeam' | 'autoSize' | 'layoutList' | 'ripple' | 'textRotate' | 'scrollProgress' | 'tilt' | 'spotlight' | 'progressRing' | 'parallax' | 'gradientText' | 'imageReveal';
 type ApiRow = [string, string, string];
@@ -17,23 +18,21 @@ export interface AnimationPageMeta {
   preview: ReactNode;
 }
 
-const activityItems = [
-  { id: 'workspace', initials: 'W', title: 'Workspace created', description: 'Studio One is ready to use', time: '2 min ago' },
-  { id: 'review', initials: 'D', title: 'Design review completed', description: 'All 8 comments were resolved', time: '18 min ago' },
-  { id: 'release', initials: 'R', title: 'Release published', description: 'Version 2.4.0 is now live', time: '1 hr ago' },
-];
-
 function ExpandPreview() {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="animation-expand-demo">
       <button type="button" aria-expanded={open} aria-controls="animation-expand-demo-panel" onClick={() => setOpen((value) => !value)}>
-        {open ? '收起内容' : '展开内容'}
+        {open ? '收起项目详情' : '展开项目详情'}
       </button>
-      <Expand id="animation-expand-demo-panel" open={open} className="animation-expand-preview">
-        <p>Additional details are revealed here.</p>
+      <p className="reference-demo__hint">观察项目简介下方内容高度的平滑变化。</p>
+      <div className="animation-expand-preview">
+        <div className="animation-expand-preview__summary"><strong>品牌体验升级</strong><span className="reference-demo__badge">进行中</span></div>
+      <Expand id="animation-expand-demo-panel" open={open}>
+        <div className="animation-expand-preview__details"><p>统一品牌视觉、梳理关键交互，并建立可复用的组件规范。</p><p>负责人：Alex Morgan · 下次评审：周五</p></div>
       </Expand>
+      </div>
     </div>
   );
 }
@@ -55,17 +54,22 @@ export function ProjectMarquee() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['duration', 'number', '28 秒'], ['direction', "'left' | 'right'", 'left'], ['pauseOnHover', 'boolean', 'true'], ['gradient', 'boolean', 'false']],
-    preview: <Marquee duration={12} gradient><span className="animation-pill">Design systems</span><span className="animation-pill">Product teams</span><span className="animation-pill">Made to move</span></Marquee>,
+    preview: animationDemoPreviews.marquee,
   },
   {
     id: 'numberTicker', title: 'NumberTicker 数值滚动', icon: '↗', description: '使用缓动数字递增强调统计值和关键指标。',
-    code: `import { NumberTicker } from 'atelier-motion/number-ticker';
+    code: `import { useState } from 'react';
+import { NumberTicker } from 'atelier-motion/number-ticker';
 
 export function MonthlyRevenue() {
-  return <NumberTicker value={12840} prefix="$" duration={1400} />;
+  const [revenue, setRevenue] = useState(12840);
+  return <div>
+    <button type="button" onClick={() => setRevenue((value) => value === 12840 ? 24680 : 12840)}>切换目标数值</button>
+    <article><span>本月收入</span><strong><NumberTicker value={revenue} prefix="¥" duration={1600} /></strong></article>
+  </div>;
 }`,
     rows: [['value', 'number', 'required'], ['startValue', 'number', '0'], ['duration', 'number', '1200 ms'], ['delay', 'number', '0 ms'], ['decimals', 'number', '0'], ['locale', 'string', 'zh-CN'], ['prefix / suffix', 'string', '—']],
-    preview: <div className="animation-number-preview"><NumberTicker value={12840} prefix="$" duration={1600} /></div>,
+    preview: animationDemoPreviews.numberTicker,
   },
   {
     id: 'typingAnimation', title: 'TypingAnimation 打字效果', icon: '▏', description: '逐字输入、停顿并轮播多段短文案。',
@@ -81,7 +85,7 @@ export function RotatingHeadline() {
   );
 }`,
     rows: [['words', 'string[]', 'required'], ['typeSpeed', 'number', '75 ms'], ['deleteSpeed', 'number', '38 ms'], ['pauseDuration', 'number', '1300 ms'], ['loop', 'boolean', 'true'], ['cursor', 'boolean', 'true']],
-    preview: <div className="animation-typing-preview"><TypingAnimation words={['Build with clarity', 'Ship with confidence']} typeSpeed={65} pauseDuration={1000} /></div>,
+    preview: animationDemoPreviews.typingAnimation,
   },
   {
     id: 'blurFade', title: 'BlurFade 模糊渐入', icon: '◌', description: '让内容以轻微位移和模糊渐显，支持错峰延迟。',
@@ -95,7 +99,7 @@ export function Intro() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['delay', 'number', '0 ms'], ['duration', 'number', '500 ms'], ['blur', 'number', '6 px'], ['offsetY', 'number', '8 px']],
-    preview: <BlurFade key="blur-fade-demo" className="animation-fade-preview" delay={80} duration={850}><strong>Every detail finds its place.</strong></BlurFade>,
+    preview: animationDemoPreviews.blurFade,
   },
   {
     id: 'fadeIn', title: 'FadeIn 淡入', icon: '◦', description: '让内容以轻柔的透明度渐变进入，可配置延迟与时长。',
@@ -109,7 +113,7 @@ export function Intro() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['delay', 'number', '0 ms'], ['duration', 'number', '500 ms'], ['HTML attributes', 'HTMLAttributes<HTMLDivElement>', '—']],
-    preview: <FadeIn key="fade-in-demo" className="animation-fade-preview" delay={80} duration={850}><strong>Every detail finds its place.</strong></FadeIn>,
+    preview: animationDemoPreviews.fadeIn,
   },
   {
     id: 'slideIn', title: 'SlideIn 滑入', icon: '⇲', description: '让内容从指定方向平滑滑入，同时淡入显示。',
@@ -123,24 +127,28 @@ export function Intro() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['direction', "'left' | 'right' | 'up' | 'down'", 'up'], ['distance', 'number', '16 px'], ['delay', 'number', '0 ms'], ['duration', 'number', '500 ms'], ['HTML attributes', 'HTMLAttributes<HTMLDivElement>', '—']],
-    preview: <SlideIn key="slide-in-demo" className="animation-fade-preview" direction="left" distance={24} delay={80} duration={850}><strong>Every detail finds its place.</strong></SlideIn>,
+    preview: animationDemoPreviews.slideIn,
   },
   {
     id: 'scrollReveal', title: 'ScrollReveal 滚动显现', icon: '⌄', description: '元素进入视口时渐入，可选择方向、距离及是否重复触发。',
-    code: `import { ScrollReveal } from 'atelier-motion/scroll-reveal';
+    code: `import { useRef } from 'react';
+import { ScrollReveal } from 'atelier-motion/scroll-reveal';
 
 export function FeatureCard() {
-  return (
-    <ScrollReveal direction="up" distance={20} once>
-      <article>
-        <h2>Reveal on scroll</h2>
-        <p>Content appears as it enters the viewport.</p>
-      </article>
-    </ScrollReveal>
-  );
+  const scrollRef = useRef<HTMLDivElement>(null);
+  return <div>
+    <button type="button" onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}>回到顶部</button>
+    <div ref={scrollRef} style={{ height: 240, overflowY: 'auto' }} tabIndex={0} aria-label="滚动显现演示区域">
+      <div style={{ height: 180 }}>向下滚动 ↓</div>
+      <ScrollReveal once={false} distance={36} threshold={0.3}>
+        <article><h2>刚好在此刻出现</h2><p>进入可见区域时显现。</p></article>
+      </ScrollReveal>
+      <div style={{ height: 180 }}>向上滚动可以重播</div>
+    </div>
+  </div>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['direction', "'left' | 'right' | 'up' | 'down'", 'up'], ['distance', 'number', '16 px'], ['delay / duration', 'number', '0 / 600 ms'], ['threshold', 'number', '0.1'], ['rootMargin', 'string', '0px'], ['once', 'boolean', 'true']],
-    preview: <ScrollReveal key="scroll-reveal-demo" className="animation-fade-preview" direction="up"><strong>Reveal on scroll</strong></ScrollReveal>,
+    preview: animationDemoPreviews.scrollReveal,
   },
   {
     id: 'scaleIn', title: 'ScaleIn 缩放弹入', icon: '⊙', description: '内容从较小比例平滑放大并淡入，适用于卡片、弹窗和菜单。',
@@ -154,7 +162,7 @@ export function WelcomeCard() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['startScale', 'number', '0.88'], ['delay', 'number', '0 ms'], ['duration', 'number', '450 ms']],
-    preview: <ScaleIn key="scale-in-demo" className="animation-fade-preview"><strong>Welcome back</strong></ScaleIn>,
+    preview: animationDemoPreviews.scaleIn,
   },
   {
     id: 'stagger', title: 'Stagger 错峰动画', icon: '☷', description: '以错峰顺序呈现任意子元素，适合标签、卡片和列表内容。',
@@ -170,7 +178,7 @@ export function FeatureTags() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['staggerDelay', 'number', '70 ms'], ['duration', 'number', '420 ms'], ['itemClassName', 'string', '—'], ['HTML attributes', 'HTMLAttributes<HTMLDivElement>', '—']],
-    preview: <Stagger key="stagger-demo" className="animation-stagger-preview" staggerDelay={100}><span className="animation-pill">Fast setup</span><span className="animation-pill">Accessible</span><span className="animation-pill">Customizable</span></Stagger>,
+    preview: animationDemoPreviews.stagger,
   },
   {
     id: 'expand', title: 'Expand 平滑展开', icon: '⌄', description: '对受控内容进行平滑展开与收起，并隐藏折叠内容的辅助技术焦点。',
@@ -181,14 +189,16 @@ export function Details() {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <button type="button" onClick={() => setOpen((value) => !value)}>
-        {open ? 'Hide details' : 'Show details'}
+    <div>
+      <button type="button" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+        {open ? '收起项目详情' : '展开项目详情'}
       </button>
+      <h3>品牌体验升级</h3>
       <Expand open={open}>
-        <p>Additional details are revealed here.</p>
+        <p>统一品牌视觉、梳理关键交互，并建立可复用的组件规范。</p>
+        <p>负责人：Alex Morgan · 下次评审：周五</p>
       </Expand>
-    </>
+    </div>
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['open', 'boolean', 'required'], ['duration', 'number', '300 ms'], ['HTML attributes', 'HTMLAttributes<HTMLDivElement>', '—']],
@@ -202,7 +212,7 @@ export function LiveStatus() {
   return <Pulse duration={1400}><span>● Live now</span></Pulse>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['duration', 'number', '1400 ms'], ['HTML attributes', 'HTMLAttributes<HTMLDivElement>', '—']],
-    preview: <Pulse className="animation-fade-preview"><strong>● Live now</strong></Pulse>,
+    preview: animationDemoPreviews.pulse,
   },
   {
     id: 'glow', title: 'Glow 柔光', icon: '✧', description: '在内容周围循环显示柔和光晕，可自定义颜色与速度。',
@@ -212,7 +222,7 @@ export function Highlight() {
   return <Glow color="#8b7dff" duration={1800}>Featured</Glow>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['color', 'string', '#8b7dff'], ['duration', 'number', '1800 ms']],
-    preview: <Glow className="animation-fade-preview"><strong>Featured</strong></Glow>,
+    preview: animationDemoPreviews.glow,
   },
   {
     id: 'shake', title: 'Shake 震动反馈', icon: '↔', description: '通过短促的水平抖动反馈错误或无效操作，可用 active 重新触发。',
@@ -222,7 +232,7 @@ export function InvalidField() {
   return <Shake active><span role="alert">Please check this field.</span></Shake>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['active', 'boolean', 'true'], ['duration', 'number', '650 ms']],
-    preview: <Shake key="shake-demo" className="animation-fade-preview"><strong>Invalid input</strong></Shake>,
+    preview: animationDemoPreviews.shake,
   },
   {
     id: 'wobble', title: 'Wobble 摇摆反馈', icon: '↝', description: '以轻微旋转摆动吸引注意，可用 active 控制播放与重播。',
@@ -232,7 +242,7 @@ export function NewFeature() {
   return <Wobble active><span>New feature</span></Wobble>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['active', 'boolean', 'true'], ['duration', 'number', '900 ms']],
-    preview: <Wobble key="wobble-demo" className="animation-fade-preview"><strong>New feature</strong></Wobble>,
+    preview: animationDemoPreviews.wobble,
   },
   {
     id: 'hoverLift', title: 'HoverLift 悬停抬升', icon: '⌃', description: '鼠标悬停时轻微上浮，常用于卡片和可点击内容。',
@@ -246,7 +256,7 @@ export function ProjectCard() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['lift', 'number', '6 px'], ['duration', 'number', '500 ms']],
-    preview: <HoverLift className="animation-interaction-preview"><strong>Hover to lift</strong></HoverLift>,
+    preview: animationDemoPreviews.hoverLift,
   },
   {
     id: 'press', title: 'Press 按压反馈', icon: '●', description: '指针按下时轻微缩小，提供即时的交互反馈。',
@@ -260,7 +270,7 @@ export function PressableCard() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['duration', 'number', '500 ms']],
-    preview: <Press className="animation-interaction-preview"><strong>Press and hold</strong></Press>,
+    preview: animationDemoPreviews.press,
   },
   {
     id: 'flipIn', title: 'FlipIn 翻转进入', icon: '⟳', description: '内容以 3D 翻转并淡入，可选择绕 X 或 Y 轴旋转。',
@@ -270,7 +280,7 @@ export function RevealCard() {
   return <FlipIn direction="y" duration={600}><article>Just revealed</article></FlipIn>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['direction', "'x' | 'y'", 'y'], ['delay', 'number', '0 ms'], ['duration', 'number', '600 ms']],
-    preview: <FlipIn key="flip-in-demo" className="animation-fade-preview"><strong>Just revealed</strong></FlipIn>,
+    preview: animationDemoPreviews.flipIn,
   },
   {
     id: 'flipCard', title: 'FlipCard 翻转卡片', icon: '▣', description: '通过外部状态控制卡片正反面翻转。',
@@ -282,13 +292,14 @@ export function MemberCard() {
 
   return (
     <div>
-      <button type="button" onClick={() => setFlipped((value) => !value)}>
-        Flip card
+      <button type="button" aria-pressed={flipped} onClick={() => setFlipped((value) => !value)}>
+        {flipped ? '翻回正面' : '翻到背面'}
       </button>
       <FlipCard
         flipped={flipped}
-        front={<strong>Alex Morgan</strong>}
-        back={<span>Product designer</span>}
+        aria-label="Alex Morgan 成员名片"
+        front={<article><span>正面 / PROFILE</span><strong>Alex Morgan</strong><p>产品设计师</p></article>}
+        back={<article><span>背面 / ABOUT</span><strong>让好想法成为好体验</strong><p>专注产品体验与设计系统</p></article>}
       />
     </div>
   );
@@ -308,7 +319,7 @@ export function SuccessMessage() {
   );
 }`,
     rows: [['children', 'ReactNode', 'optional'], ['active', 'boolean', 'true'], ['count', 'number', '24'], ['duration', 'number', '1800 ms'], ['colors', 'string[]', '内置配色']],
-    preview: <div className="animation-confetti-preview"><Confetti><strong>Payment complete!</strong></Confetti></div>,
+    preview: animationDemoPreviews.confetti,
   },
   {
     id: 'shimmer', title: 'Shimmer 流光', icon: '✧', description: '为内容表面添加柔和的掠光效果，可自定义高光颜色。',
@@ -322,38 +333,34 @@ export function Highlight() {
   );
 }`,
     rows: [['children', 'ReactNode', 'required'], ['duration', 'number', '1800 ms'], ['highlight', 'string', '半透明白色']],
-    preview: <Shimmer className="animation-shimmer-preview"><strong>Ready for the next release</strong></Shimmer>,
+    preview: animationDemoPreviews.shimmer,
   },
   {
     id: 'animatedList', title: 'AnimatedList 列表渐入', icon: '☷', description: '以错峰渐入动画呈现动态列表内容。',
-    code: `import { AnimatedList } from 'atelier-motion/animated-list';
+    code: `import { useState } from 'react';
+import { AnimatedList } from 'atelier-motion/animated-list';
+
+const initialActivities = [
+  { id: 1, title: '工作区已创建', detail: '团队现在可以开始协作' },
+  { id: 2, title: '设计评审已完成', detail: '8 条意见均已解决' },
+];
 
 export function ActivityFeed() {
-  const activities = [
-    { id: 'workspace', initials: 'W', title: 'Workspace created', detail: 'Studio One is ready to use', time: '2 min ago' },
-    { id: 'review', initials: 'D', title: 'Design review completed', detail: 'All 8 comments were resolved', time: '18 min ago' },
-    { id: 'release', initials: 'R', title: 'Release published', detail: 'Version 2.4.0 is now live', time: '1 hr ago' },
-  ];
-
-  return (
-    <AnimatedList
-      items={activities}
-      getItemKey={(activity) => activity.id}
-      renderItem={(activity) => (
-        <article className="activity-item">
-          <span className="activity-item__avatar">{activity.initials}</span>
-          <span className="activity-item__content">
-            <strong>{activity.title}</strong>
-            <small>{activity.detail}</small>
-          </span>
-          <time>{activity.time}</time>
-        </article>
-      )}
-    />
-  );
+  const [activities, setActivities] = useState(initialActivities);
+  const [nextId, setNextId] = useState(3);
+  return <div>
+    <button type="button" disabled={activities.length >= 6} onClick={() => {
+      setActivities((items) => [{ id: nextId, title: \`新增项目动态 \${nextId}\`, detail: '刚刚更新' }, ...items]);
+      setNextId((id) => id + 1);
+    }}>添加动态</button>
+    <button type="button" onClick={() => { setActivities(initialActivities); setNextId(3); }}>重置列表</button>
+    <AnimatedList items={activities} getItemKey={(item) => item.id}
+      renderItem={(item) => <article><strong>{item.title}</strong><p>{item.detail}</p></article>}
+      staggerDelay={100} />
+  </div>;
 }`,
     rows: [['items', 'ReactNode[] | T[]', 'required'], ['renderItem', '(item: T, index: number) => ReactNode', '自定义结构化数据的列表项'], ['getItemKey', '(item: T, index: number) => Key', '—'], ['staggerDelay', 'number', '70 ms'], ['duration', 'number', '420 ms'], ['itemClassName', 'string', '—'], ['HTML attributes', 'HTMLAttributes<HTMLUListElement>', '—']],
-    preview: <AnimatedList key="activity-list-demo" className="animation-list-preview" items={activityItems} getItemKey={(item) => item.id} renderItem={(item) => <article className="animation-list-preview__item"><span className="animation-list-preview__avatar">{item.initials}</span><span className="animation-list-preview__body"><strong>{item.title}</strong><small>{item.description}</small></span><time>{item.time}</time></article>} staggerDelay={120} />,
+    preview: animationDemoPreviews.animatedList,
   },
   {
     id: 'transition', title: 'Transition 单项过渡', icon: '↕', description: '为条件显示的面板或内容提供统一的进入、退出生命周期。',
@@ -363,12 +370,12 @@ import { Transition } from 'atelier-motion/transition';
 export function FilterPanel() {
   const [open, setOpen] = useState(true);
   return (
-    <>
-      <button type="button" onClick={() => setOpen((value) => !value)}>切换筛选面板</button>
-      <Transition in={open} animation="collapse" timeout={200}>
-        <div>筛选条件与结果设置</div>
+    <div>
+      <button type="button" aria-expanded={open} onClick={() => setOpen((value) => !value)}>{open ? '收起筛选面板' : '展开筛选面板'}</button>
+      <Transition in={open} animation="collapse" timeout={450}>
+        <section><h3>项目筛选</h3><p>当前条件：进行中 · 设计团队 · 本月更新</p></section>
       </Transition>
-    </>
+    </div>
   );
 }`,
     rows: [['in', 'boolean', 'true'], ['animation', "'fade' | 'slide-up' | 'collapse' | 'none'", 'fade'], ['timeout', 'number', '200 ms'], ['appear', 'boolean', 'false'], ['mountOnEnter / unmountOnExit', 'boolean', 'true'], ['exit', 'ReactNode', 'children'], ['classNames', 'string | Partial<Record<TransitionStatus, string>>', '—'], ['onEnter / onEntered', '(node: HTMLDivElement) => void', '—'], ['onExit / onExited', '(node: HTMLDivElement) => void', '—']],
@@ -382,23 +389,26 @@ export function FilterPanel() {
   },
   {
     id: 'borderBeam', title: 'BorderBeam 边框流光', icon: '✧', description: '为重点内容添加可控颜色和速度的流动边框。',
-    code: `import { BorderBeam } from 'atelier-motion/border-beam';
+    code: `import { useState } from 'react';
+import { BorderBeam } from 'atelier-motion/border-beam';
 
 export function HighlightCard() {
-  return (
-    <BorderBeam color="#2f9472" duration={5}>
-      <strong>Ready for the next release</strong>
+  const [paused, setPaused] = useState(false);
+  return <div>
+    <button type="button" aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? '继续流光' : '暂停流光'}</button>
+    <BorderBeam color="#2f9472" duration={3} paused={paused}>
+      <article><h2>让创意持续流动</h2><p>重点内容值得被温柔地强调。</p></article>
     </BorderBeam>
-  );
+  </div>;
 }`,
     rows: [['children', 'ReactNode', 'required'], ['color', 'string', '#8b7dff'], ['duration', 'number', '5 秒'], ['paused', 'boolean', 'false'], ['className', 'string', '—']],
-    preview: <BorderBeam color="#2f9472"><strong>Ready for the next release</strong></BorderBeam>,
+    preview: animationDemoPreviews.borderBeam,
   },
 ];
 
 function SingleTransitionDemo() {
   const [open, setOpen] = useState(true);
-  return <div className="animation-transition-demo"><button type="button" onClick={() => setOpen((value) => !value)}>切换筛选面板</button><Transition in={open} animation="collapse" timeout={200}><div className="animation-transition-panel">筛选条件与结果设置</div></Transition></div>;
+  return <div className="animation-transition-demo"><div className="reference-demo__actions"><button type="button" aria-expanded={open} onClick={() => setOpen((value) => !value)}>{open ? '收起筛选面板' : '展开筛选面板'}</button><span className="reference-demo__hint" aria-live="polite">面板已{open ? '展开' : '收起'}</span></div><Transition in={open} animation="collapse" timeout={450}><div className="animation-transition-panel"><span className="reference-demo__badge">筛选条件</span><strong>项目筛选</strong><p>当前条件：进行中 · 设计团队 · 本月更新</p></div></Transition></div>;
 }
 
 function TransitionGroupDemo() {
@@ -442,5 +452,5 @@ export function AnimationPage({ id }: { id: AnimationPageId }) {
 }
 function FlipCardPreview() {
   const [flipped, setFlipped] = useState(false);
-  return <div className="animation-transition-demo"><button type="button" onClick={() => setFlipped((value) => !value)}>翻转卡片</button><FlipCard className="animation-flip-card" flipped={flipped} front={<strong>Alex Morgan</strong>} back={<span>Product designer</span>} /></div>;
+  return <div className="animation-transition-demo"><div className="reference-demo__actions"><button type="button" aria-pressed={flipped} onClick={() => setFlipped((value) => !value)}>{flipped ? '翻回正面' : '翻到背面'}</button><span className="reference-demo__hint" aria-live="polite">当前：{flipped ? '背面 · 成员详情' : '正面 · 成员名片'}</span></div><FlipCard className="animation-flip-card" flipped={flipped} aria-label="Alex Morgan 成员名片" front={<div className="animation-flip-card__profile"><small>正面 / PROFILE</small><span className="animation-flip-card__avatar">AM</span><strong>Alex Morgan</strong><span>产品设计师</span></div>} back={<div className="animation-flip-card__profile"><small>背面 / ABOUT</small><strong>让好想法成为好体验</strong><span>专注产品体验与设计系统</span></div>} /></div>;
 }

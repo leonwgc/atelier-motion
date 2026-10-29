@@ -64,13 +64,13 @@ function TextRotateDemo() {
   const [paused, setPaused] = useState(false);
   const [index, setIndex] = useState(0);
   const [animation, setAnimation] = useState<'fade' | 'slide-up'>('slide-up');
-  const words = ['Build with clarity', 'Ship with confidence', 'Made to move'];
+  const words = ['让想法清晰呈现', '让协作自然发生', '让细节恰到好处'];
   return <div className="motion-demo">
     <div className="motion-demo__actions">
       <button type="button" aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? '继续轮播' : '暂停轮播'}</button>
       <label>切换效果 <select value={animation} onChange={(event) => setAnimation(event.target.value === 'fade' ? 'fade' : 'slide-up')}><option value="slide-up">向上滑动</option><option value="fade">淡入</option></select></label>
     </div>
-    <div className="motion-demo__text"><TextRotate words={words} paused={paused} animation={animation} /></div>
+    <div className="motion-demo__text-card"><span className="reference-demo__badge">为团队打造更好的体验</span><strong className="motion-demo__text"><TextRotate words={words} paused={paused} animation={animation} /></strong><p>整句文案依次切换，适合首页标语或活动介绍。</p></div>
     <div className="motion-demo__actions"><button type="button" onClick={() => setIndex((value) => (value + 1) % words.length)}>切换受控文案</button><TextRotate words={words} index={index} animation={animation} /></div>
     <p className="motion-demo__note">自动模式悬停时暂停；受控模式由 index 决定当前文案。减少动态效果时直接切换。</p>
   </div>;
@@ -218,7 +218,7 @@ import { TextRotate } from 'atelier-motion/text-rotate';
 export function RotatingHeadline() {
   const [paused, setPaused] = useState(false);
   const [index, setIndex] = useState(0);
-  const words = ['Build with clarity', 'Ship with confidence'];
+  const words = ['让想法清晰呈现', '让协作自然发生'];
 
   return (
     <div>

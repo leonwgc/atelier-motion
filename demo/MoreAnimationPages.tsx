@@ -7,7 +7,7 @@ import type { AnimationPageMeta } from './AnimationPages';
 
 function ProgressRingDemo() {
   const [value, setValue] = useState(68);
-  return <div className="motion-demo"><div className="motion-demo__actions"><ProgressRing value={value} aria-label="项目完成进度" /><button type="button" onClick={() => setValue((current) => current >= 100 ? 0 : current + 16)}>更新进度</button></div><p className="motion-demo__note">受控数值在 0–100 之间变化，圆环平滑跟随。</p></div>;
+  return <div className="motion-demo"><div className="motion-demo__actions"><button type="button" onClick={() => setValue((current) => current >= 100 ? 0 : Math.min(100, current + 16))}>{value >= 100 ? '重新上传' : '继续上传'}</button><span className="motion-demo__note">观察数值更新时圆环如何平滑跟随。</span></div><div className="motion-demo__upload-card"><span className="motion-demo__upload-icon" aria-hidden="true">↑</span><div><strong>品牌手册.pdf</strong><small>{value >= 100 ? '上传完成' : '正在上传 · 2.4 MB'}</small></div><ProgressRing value={value} size={76} strokeWidth={7} aria-label="品牌手册上传进度" /></div></div>;
 }
 
 function ParallaxDemo() {
@@ -55,9 +55,10 @@ import { ProgressRing } from 'atelier-motion/progress-ring';
 
 export function UploadProgress() {
   const [value, setValue] = useState(68);
-  return <div>
-    <ProgressRing value={value} aria-label="上传进度" />
-    <button type="button" onClick={() => setValue(100)}>完成上传</button>
+  return <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+    <span>品牌手册.pdf</span>
+    <ProgressRing value={value} size={76} aria-label="品牌手册上传进度" />
+    <button type="button" onClick={() => setValue((current) => Math.min(100, current + 16))}>继续上传</button>
   </div>;
 }`,
     rows: [['value', 'number；限制到 0–100', 'required'], ['size', 'number', '96 px'], ['strokeWidth', 'number', '8 px'], ['color / trackColor', 'string', '主题色 / 边框色'], ['duration', 'number', '450 ms'], ['children', 'ReactNode；圆心内容', '百分比'], ['aria-label', 'string', 'Progress']],
