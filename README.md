@@ -1,6 +1,6 @@
 # Atelier Motion
 
-从 `atelier-ui` 抽离的独立 React 动画组件库，包含 31 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
+从 `atelier-ui` 抽离的独立 React 动画组件库，包含 35 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
 
 ## 开发
 
@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-打开 <http://localhost:4100>。Demo 包含组件搜索、独立组件页面、动画重播、完整 TSX 示例和 API 表格；通过 URL hash 可直接访问组件，例如 `/#fadeIn`。
+打开 <http://localhost:4100>。Demo 包含全局组件搜索（⌘/Ctrl + K）、独立组件页面、动画重播、完整 TSX 示例和 API 表格；通过 URL hash 可直接访问组件，例如 `/#fadeIn`。
 
 ```sh
 npm run typecheck
@@ -62,6 +62,10 @@ import 'atelier-motion/styles/fade-in.css'; // 对应 dist/fade-in.css
 
 | 组件 | 按需入口 | 用途 |
 | --- | --- | --- |
+| ProgressRing | `atelier-motion/progress-ring` | 确定进度的环形展示 |
+| Parallax | `atelier-motion/parallax` | 页面或容器滚动视差 |
+| GradientText | `atelier-motion/gradient-text` | 营销标题流动渐变 |
+| ImageReveal | `atelier-motion/image-reveal` | 图片进入视口时方向揭示 |
 | ScrollProgress | `atelier-motion/scroll-progress` | 页面或容器阅读进度 |
 | Tilt | `atelier-motion/tilt` | 指针倾斜反馈 |
 | Spotlight | `atelier-motion/spotlight` | 指针跟随光效 |

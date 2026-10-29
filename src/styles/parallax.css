@@ -1,0 +1,3 @@
+.at-parallax { position: relative; overflow: hidden; }
+.at-parallax__inner { will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .at-parallax__inner { transform: none !important; will-change: auto; } }

@@ -37,6 +37,10 @@ export default defineConfig({
         'scroll-progress': resolve(process.cwd(), 'src/entries/scroll-progress.ts'),
         'tilt': resolve(process.cwd(), 'src/entries/tilt.ts'),
         'spotlight': resolve(process.cwd(), 'src/entries/spotlight.ts'),
+        'progress-ring': resolve(process.cwd(), 'src/entries/progress-ring.ts'),
+        'parallax': resolve(process.cwd(), 'src/entries/parallax.ts'),
+        'gradient-text': resolve(process.cwd(), 'src/entries/gradient-text.ts'),
+        'image-reveal': resolve(process.cwd(), 'src/entries/image-reveal.ts'),
 
         'auto-size': resolve(process.cwd(), 'src/entries/auto-size.ts'),
         'layout-list': resolve(process.cwd(), 'src/entries/layout-list.ts'),

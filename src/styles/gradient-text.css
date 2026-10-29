@@ -1,0 +1,4 @@
+.at-gradient-text { display: inline; color: var(--at-color-primary); background-image: var(--at-gradient-text-background); background-size: 200% 100%; background-position: 0% 50%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.at-gradient-text--animated { animation: at-gradient-text-move var(--at-gradient-text-duration) linear infinite alternate; }
+@keyframes at-gradient-text-move { to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .at-gradient-text--animated { animation: none; } }

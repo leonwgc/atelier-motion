@@ -188,6 +188,26 @@
       "types": "./dist/entries/spotlight.d.ts",
       "import": "./dist/spotlight.js",
       "require": "./dist/spotlight.cjs"
+    },
+    "./progress-ring": {
+      "types": "./dist/entries/progress-ring.d.ts",
+      "import": "./dist/progress-ring.js",
+      "require": "./dist/progress-ring.cjs"
+    },
+    "./parallax": {
+      "types": "./dist/entries/parallax.d.ts",
+      "import": "./dist/parallax.js",
+      "require": "./dist/parallax.cjs"
+    },
+    "./gradient-text": {
+      "types": "./dist/entries/gradient-text.d.ts",
+      "import": "./dist/gradient-text.js",
+      "require": "./dist/gradient-text.cjs"
+    },
+    "./image-reveal": {
+      "types": "./dist/entries/image-reveal.d.ts",
+      "import": "./dist/image-reveal.js",
+      "require": "./dist/image-reveal.cjs"
     }
   },
   "sideEffects": [

@@ -214,10 +214,6 @@ export function ActionButton() {
     preview: <TextRotateDemo />,
     code: `import { useState } from 'react';
 import { TextRotate } from 'atelier-motion/text-rotate';
-import { ScrollProgress } from 'atelier-motion/scroll-progress';
-import { Tilt } from 'atelier-motion/tilt';
-import { Spotlight } from 'atelier-motion/spotlight';
-import { useRef } from 'react';
 
 export function RotatingHeadline() {
   const [paused, setPaused] = useState(false);
