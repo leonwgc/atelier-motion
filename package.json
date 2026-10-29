@@ -1,0 +1,179 @@
+{
+  "name": "atelier-motion",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.8.2",
+    "vite": "^8.3.5"
+  },
+  "description": "Standalone React motion components extracted from atelier-ui.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./border-beam": {
+      "types": "./dist/entries/border-beam.d.ts",
+      "import": "./dist/border-beam.js",
+      "require": "./dist/border-beam.cjs"
+    },
+    "./marquee": {
+      "types": "./dist/entries/marquee.d.ts",
+      "import": "./dist/marquee.js",
+      "require": "./dist/marquee.cjs"
+    },
+    "./number-ticker": {
+      "types": "./dist/entries/number-ticker.d.ts",
+      "import": "./dist/number-ticker.js",
+      "require": "./dist/number-ticker.cjs"
+    },
+    "./typing-animation": {
+      "types": "./dist/entries/typing-animation.d.ts",
+      "import": "./dist/typing-animation.js",
+      "require": "./dist/typing-animation.cjs"
+    },
+    "./blur-fade": {
+      "types": "./dist/entries/blur-fade.d.ts",
+      "import": "./dist/blur-fade.js",
+      "require": "./dist/blur-fade.cjs"
+    },
+    "./fade-in": {
+      "types": "./dist/entries/fade-in.d.ts",
+      "import": "./dist/fade-in.js",
+      "require": "./dist/fade-in.cjs"
+    },
+    "./slide-in": {
+      "types": "./dist/entries/slide-in.d.ts",
+      "import": "./dist/slide-in.js",
+      "require": "./dist/slide-in.cjs"
+    },
+    "./scroll-reveal": {
+      "types": "./dist/entries/scroll-reveal.d.ts",
+      "import": "./dist/scroll-reveal.js",
+      "require": "./dist/scroll-reveal.cjs"
+    },
+    "./scale-in": {
+      "types": "./dist/entries/scale-in.d.ts",
+      "import": "./dist/scale-in.js",
+      "require": "./dist/scale-in.cjs"
+    },
+    "./stagger": {
+      "types": "./dist/entries/stagger.d.ts",
+      "import": "./dist/stagger.js",
+      "require": "./dist/stagger.cjs"
+    },
+    "./expand": {
+      "types": "./dist/entries/expand.d.ts",
+      "import": "./dist/expand.js",
+      "require": "./dist/expand.cjs"
+    },
+    "./pulse": {
+      "types": "./dist/entries/pulse.d.ts",
+      "import": "./dist/pulse.js",
+      "require": "./dist/pulse.cjs"
+    },
+    "./glow": {
+      "types": "./dist/entries/glow.d.ts",
+      "import": "./dist/glow.js",
+      "require": "./dist/glow.cjs"
+    },
+    "./shake": {
+      "types": "./dist/entries/shake.d.ts",
+      "import": "./dist/shake.js",
+      "require": "./dist/shake.cjs"
+    },
+    "./wobble": {
+      "types": "./dist/entries/wobble.d.ts",
+      "import": "./dist/wobble.js",
+      "require": "./dist/wobble.cjs"
+    },
+    "./hover-lift": {
+      "types": "./dist/entries/hover-lift.d.ts",
+      "import": "./dist/hover-lift.js",
+      "require": "./dist/hover-lift.cjs"
+    },
+    "./press": {
+      "types": "./dist/entries/press.d.ts",
+      "import": "./dist/press.js",
+      "require": "./dist/press.cjs"
+    },
+    "./flip-in": {
+      "types": "./dist/entries/flip-in.d.ts",
+      "import": "./dist/flip-in.js",
+      "require": "./dist/flip-in.cjs"
+    },
+    "./flip-card": {
+      "types": "./dist/entries/flip-card.d.ts",
+      "import": "./dist/flip-card.js",
+      "require": "./dist/flip-card.cjs"
+    },
+    "./confetti": {
+      "types": "./dist/entries/confetti.d.ts",
+      "import": "./dist/confetti.js",
+      "require": "./dist/confetti.cjs"
+    },
+    "./shimmer": {
+      "types": "./dist/entries/shimmer.d.ts",
+      "import": "./dist/shimmer.js",
+      "require": "./dist/shimmer.cjs"
+    },
+    "./animated-list": {
+      "types": "./dist/entries/animated-list.d.ts",
+      "import": "./dist/animated-list.js",
+      "require": "./dist/animated-list.cjs"
+    },
+    "./transition": {
+      "types": "./dist/entries/transition.d.ts",
+      "import": "./dist/transition.js",
+      "require": "./dist/transition.cjs"
+    },
+    "./transition-group": {
+      "types": "./dist/entries/transition-group.d.ts",
+      "import": "./dist/transition-group.js",
+      "require": "./dist/transition-group.cjs"
+    },
+    "./theme.css": "./dist/theme.css",
+    "./package.json": "./package.json",
+    "./styles/*.css": "./dist/*.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "animation",
+    "motion",
+    "typescript"
+  ],
+  "scripts": {
+    "dev": "vite --config demo/vite.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "npm run build:lib && npm run build:demo",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build:demo": "vite build --config demo/vite.config.ts",
+    "preview": "vite preview --config demo/vite.config.ts",
+    "prepack": "npm run typecheck && npm run build:lib"
+  }
+}
