@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-打开 <http://localhost:4100>。Demo 包含全局组件搜索（⌘/Ctrl + K）、独立组件页面、动画重播、完整 TSX 示例和 API 表格；通过 URL hash 可直接访问组件，例如 `/#fadeIn`。
+打开 <http://localhost:4100>。Demo 包含全局组件搜索（⌘/Ctrl + K）、独立组件页面、每个组件至少 2 个用例场景、独立动画重播、完整 TSX 示例和 API 表格；通过 URL hash 可直接访问组件，例如 `/#fadeIn`。
 
 ```sh
 npm run typecheck

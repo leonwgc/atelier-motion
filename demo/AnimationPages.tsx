@@ -3,6 +3,7 @@ import { highlightCode } from './highlightCode';
 import { newAnimationPages } from './NewAnimationPages';
 import { moreAnimationPages } from './MoreAnimationPages';
 import { animationDemoPreviews } from './AnimationDemoPreviews';
+import { scenarioExamples } from './ScenarioExamples';
 import { Expand, FlipCard, Transition, TransitionGroup } from 'atelier-motion';
 
 export type AnimationPageId = 'marquee' | 'numberTicker' | 'typingAnimation' | 'blurFade' | 'fadeIn' | 'slideIn' | 'scrollReveal' | 'scaleIn' | 'stagger' | 'expand' | 'pulse' | 'glow' | 'shake' | 'wobble' | 'hoverLift' | 'press' | 'flipIn' | 'flipCard' | 'confetti' | 'shimmer' | 'animatedList' | 'transition' | 'transitionGroup' | 'borderBeam' | 'autoSize' | 'layoutList' | 'ripple' | 'textRotate' | 'scrollProgress' | 'tilt' | 'spotlight' | 'progressRing' | 'parallax' | 'gradientText' | 'imageReveal';
@@ -431,22 +432,29 @@ export function isAnimationPageId(id: string): id is AnimationPageId {
   return animationPages.some((item) => item.id === id);
 }
 
-export function AnimationPage({ id }: { id: AnimationPageId }) {
+function ExampleCard({ title, description, preview, code }: { title: string; description: string; preview: ReactNode; code: string }) {
   const [showCode, setShowCode] = useState(false);
   const [replay, setReplay] = useState(0);
+  return <section className="example-card" aria-label={title}>
+    <div className="example-card__heading"><div><h3>{title}</h3><p>{description}</p></div><button type="button" aria-expanded={showCode} className={`code-toggle ${showCode ? 'code-toggle--active' : ''}`} onClick={() => setShowCode((visible) => !visible)}><span>{`</>`}</span>{showCode ? '收起代码' : '查看完整代码'}</button></div>
+    <div className="preview-toolbar"><button type="button" onClick={() => setReplay((value) => value + 1)}>↻ 重播动画</button></div>
+    <div key={replay} className="example-card__preview">{preview}</div>
+    {showCode && <pre className="code-panel"><code dangerouslySetInnerHTML={{ __html: highlightCode(code) }} /></pre>}
+  </section>;
+}
+
+export function AnimationPage({ id }: { id: AnimationPageId }) {
   const item = animationPages.find((page) => page.id === id);
   if (!item) return null;
+  const ScenarioPreview = scenarioExamples[id].preview;
 
   return <>
     <div className="page-heading">
       <div className="eyebrow"><span className="eyebrow__dot" />动画组件</div>
       <div className="page-heading__row"><div><h1>{item.title}</h1><p>{item.description}</p></div><span className="heading-badge">{item.title.split(' ')[0]}</span></div>
     </div>
-    <section className="example-card">
-      <div className="example-card__heading"><div><h3>交互示例</h3><p>体验组件效果，再查看可直接使用的 TypeScript 示例。</p></div><button type="button" className={`code-toggle ${showCode ? 'code-toggle--active' : ''}`} onClick={() => setShowCode((visible) => !visible)}><span>{`</>`}</span>{showCode ? '收起代码' : '查看完整代码'}</button></div>
-      <div className="preview-toolbar"><button type="button" onClick={() => setReplay((value) => value + 1)}>↻ 重播动画</button></div><div key={replay} className="example-card__preview">{item.preview}</div>
-      {showCode && <pre className="code-panel"><code dangerouslySetInnerHTML={{ __html: highlightCode(item.code) }} /></pre>}
-    </section>
+    <ExampleCard key={`${id}-primary`} title="场景 1 · 基础交互" description="体验组件的常见用法，查看可直接使用的 TypeScript 示例。" preview={item.preview} code={item.code} />
+    <ExampleCard key={`${id}-scenario`} title={`场景 2 · ${scenarioExamples[id].title}`} description={scenarioExamples[id].description} preview={<ScenarioPreview />} code={scenarioExamples[id].code} />
     <section className="api-table-section"><div className="eyebrow"><span className="eyebrow__dot" /> API REFERENCE</div><h2>组件属性</h2><div className="api-table-wrap"><table className="api-table"><thead><tr><th>属性</th><th>类型</th><th>默认值</th></tr></thead><tbody>{item.rows.map(([prop, type, fallback]) => <tr key={prop}><td><code>{prop}</code></td><td>{type}</td><td>{fallback}</td></tr>)}</tbody></table></div></section>
   </>;
 }
