@@ -1,35 +1,37 @@
 # Atelier Motion
 
-从 `atelier-ui` 抽离的独立 React 动画组件库，包含 35 个组件和可独立部署的 demo。保持原组件 API 与 `at-` 样式前缀，不依赖 `atelier-ui`，也不引入额外动画运行时。
+English | [简体中文](./README.zh-CN.md)
 
-## 开发
+A standalone React animation library extracted from `atelier-ui`, with 35 components and an independently deployable demo. It preserves the original component APIs and the `at-` CSS prefix, without depending on `atelier-ui` or adding an animation runtime.
 
-需要 Node.js >= 20.19.0，使用 npm。
+## Development
+
+Requires Node.js >= 20.19.0 and npm.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-打开 <http://localhost:4100>。Demo 包含全局组件搜索（⌘/Ctrl + K）、独立组件页面、每个组件至少 2 个用例场景、独立动画重播、完整 TSX 示例和 API 表格；通过 URL hash 可直接访问组件，例如 `/#fadeIn`。
+Open <http://localhost:4100>. The demo includes global component search (⌘/Ctrl + K), individual component pages, at least two usage scenarios per component, independent animation replay, complete TSX examples, and API tables. URL hashes link directly to components, such as `/#fadeIn`.
 
 ```sh
 npm run typecheck
-npm run build        # 库输出到 dist/，demo 输出到 docs/
-npm run preview     # 预览构建后的 demo
+npm run build        # Library output: dist/; demo output: docs/
+npm run preview      # Preview the built demo
 ```
 
-`docs/` 使用相对资源路径，可部署到静态托管服务的根目录或子目录。`dist/` 与 `docs/` 独立生成，npm 包仅包含库和 README。
+`docs/` uses relative asset paths and can be hosted at a static site's root or in a subdirectory. `dist/` and `docs/` are built separately. The npm package contains the library and README documentation.
 
-## 安装与使用
+## Installation and usage
 
-发布后安装：
+Once published, install with:
 
 ```sh
 npm install atelier-motion
 ```
 
-React / React DOM 18 为 peer dependencies。支持 ESM、CommonJS 和 TypeScript 类型声明。
+React and React DOM 18 are peer dependencies. ESM, CommonJS, and TypeScript declarations are supported.
 
 ```tsx
 import { FadeIn } from 'atelier-motion/fade-in';
@@ -43,66 +45,66 @@ export function Welcome() {
 }
 ```
 
-也可以从总入口导入：
+You can also import from the main entry:
 
 ```tsx
 import { FadeIn, SlideIn, Transition, TransitionGroup } from 'atelier-motion';
 ```
 
-ESM 入口自动引入对应 CSS，需要由支持 CSS 导入的打包器处理（例如 Vite）。推荐按组件导入，避免带入无关组件样式。CommonJS 在浏览器打包环境加载样式，在 Node.js 中跳过 CSS 加载，可用于服务端渲染；SSR 页面仍需在客户端入口引入组件样式。
+ESM entries automatically import the corresponding CSS and require a bundler that supports CSS imports, such as Vite. Prefer individual component imports to avoid unrelated component styles. CommonJS loads styles in browser bundling environments and skips CSS loading in Node.js for server rendering. SSR applications still need to import component styles in their client entry.
 
 ```tsx
 import 'atelier-motion/theme.css';
-import 'atelier-motion/styles/fade-in.css'; // 对应 dist/fade-in.css
+import 'atelier-motion/styles/fade-in.css'; // Maps to dist/fade-in.css
 ```
 
-保留 `--at-*` 主题变量，可覆盖颜色、圆角和缓动曲线。主题仅声明变量，不覆盖宿主页面的字体、表单元素或全局交互样式。组件遵循 `prefers-reduced-motion`。
+Override `--at-*` theme variables to customize colors, border radii, and easing curves. The theme only defines variables; it does not override the host application's typography, form elements, or global interaction styles. Components respect `prefers-reduced-motion`.
 
-## 组件目录
+## Component directory
 
-| 组件 | 按需入口 | 用途 |
+| Component | Individual entry | Purpose |
 | --- | --- | --- |
-| ProgressRing | `atelier-motion/progress-ring` | 确定进度的环形展示 |
-| Parallax | `atelier-motion/parallax` | 页面或容器滚动视差 |
-| GradientText | `atelier-motion/gradient-text` | 营销标题流动渐变 |
-| ImageReveal | `atelier-motion/image-reveal` | 图片进入视口时方向揭示 |
-| ScrollProgress | `atelier-motion/scroll-progress` | 页面或容器阅读进度 |
-| Tilt | `atelier-motion/tilt` | 指针倾斜反馈 |
-| Spotlight | `atelier-motion/spotlight` | 指针跟随光效 |
-| AutoSize | `atelier-motion/auto-size` | 内容变化时平滑调整高度 |
-| LayoutList | `atelier-motion/layout-list` | 纵向列表排序与增删位置动画 |
-| Ripple | `atelier-motion/ripple` | 点击位置或键盘中心涟漪 |
-| TextRotate | `atelier-motion/text-rotate` | 自动或受控的整句文案轮换 |
-| AnimatedList | `atelier-motion/animated-list` | 列表交错渐入 |
-| BlurFade | `atelier-motion/blur-fade` | 模糊渐入 |
-| BorderBeam | `atelier-motion/border-beam` | 边框流光 |
-| Confetti | `atelier-motion/confetti` | 庆祝粒子 |
-| Expand | `atelier-motion/expand` | 受控展开与收起 |
-| FadeIn | `atelier-motion/fade-in` | 透明度淡入 |
-| FlipCard | `atelier-motion/flip-card` | 受控正反面翻转 |
-| FlipIn | `atelier-motion/flip-in` | 翻转进入 |
-| Glow | `atelier-motion/glow` | 循环柔光 |
-| HoverLift | `atelier-motion/hover-lift` | 悬停抬升 |
-| Marquee | `atelier-motion/marquee` | 连续滚动 |
-| NumberTicker | `atelier-motion/number-ticker` | 数值滚动 |
-| Press | `atelier-motion/press` | 按压反馈 |
-| Pulse | `atelier-motion/pulse` | 呼吸效果 |
-| ScaleIn | `atelier-motion/scale-in` | 缩放进入 |
-| ScrollReveal | `atelier-motion/scroll-reveal` | 进入视口时显现 |
-| Shake | `atelier-motion/shake` | 水平抖动反馈 |
-| Shimmer | `atelier-motion/shimmer` | 表面掠光 |
-| SlideIn | `atelier-motion/slide-in` | 方向滑入 |
-| Stagger | `atelier-motion/stagger` | 子项错峰渐入 |
-| Transition | `atelier-motion/transition` | 进入、退出生命周期 |
-| TransitionGroup | `atelier-motion/transition-group` | 按稳定 key 管理动态项 |
-| TypingAnimation | `atelier-motion/typing-animation` | 逐字输入 |
-| Wobble | `atelier-motion/wobble` | 摇摆反馈 |
+| ProgressRing | `atelier-motion/progress-ring` | Circular determinate progress |
+| Parallax | `atelier-motion/parallax` | Page or container scroll parallax |
+| GradientText | `atelier-motion/gradient-text` | Animated gradients for marketing headlines |
+| ImageReveal | `atelier-motion/image-reveal` | Directional image reveals on viewport entry |
+| ScrollProgress | `atelier-motion/scroll-progress` | Page or container reading progress |
+| Tilt | `atelier-motion/tilt` | Pointer-driven tilt feedback |
+| Spotlight | `atelier-motion/spotlight` | Light that follows the pointer |
+| AutoSize | `atelier-motion/auto-size` | Smooth height changes as content updates |
+| LayoutList | `atelier-motion/layout-list` | Position animations for vertical list reordering, insertion, and removal |
+| Ripple | `atelier-motion/ripple` | Ripples from pointer coordinates or the center on keyboard activation |
+| TextRotate | `atelier-motion/text-rotate` | Automatic or controlled rotation of whole phrases |
+| AnimatedList | `atelier-motion/animated-list` | Staggered list entrances |
+| BlurFade | `atelier-motion/blur-fade` | Blurred fade-in |
+| BorderBeam | `atelier-motion/border-beam` | Animated border light |
+| Confetti | `atelier-motion/confetti` | Celebration particles |
+| Expand | `atelier-motion/expand` | Controlled expansion and collapse |
+| FadeIn | `atelier-motion/fade-in` | Opacity fade-in |
+| FlipCard | `atelier-motion/flip-card` | Controlled front/back card flipping |
+| FlipIn | `atelier-motion/flip-in` | Flip entrance |
+| Glow | `atelier-motion/glow` | Looping soft glow |
+| HoverLift | `atelier-motion/hover-lift` | Lift on hover |
+| Marquee | `atelier-motion/marquee` | Continuous scrolling |
+| NumberTicker | `atelier-motion/number-ticker` | Animated numeric values |
+| Press | `atelier-motion/press` | Press feedback |
+| Pulse | `atelier-motion/pulse` | Breathing effect |
+| ScaleIn | `atelier-motion/scale-in` | Scale entrance |
+| ScrollReveal | `atelier-motion/scroll-reveal` | Reveal on viewport entry |
+| Shake | `atelier-motion/shake` | Horizontal shake feedback |
+| Shimmer | `atelier-motion/shimmer` | Sweeping surface highlight |
+| SlideIn | `atelier-motion/slide-in` | Directional slide entrance |
+| Stagger | `atelier-motion/stagger` | Staggered child entrances |
+| Transition | `atelier-motion/transition` | Enter and exit lifecycle |
+| TransitionGroup | `atelier-motion/transition-group` | Dynamic items managed by stable keys |
+| TypingAnimation | `atelier-motion/typing-animation` | Character-by-character typing |
+| Wobble | `atelier-motion/wobble` | Wobble feedback |
 
-大多数组件时间单位为毫秒；`Marquee.duration` 和 `BorderBeam.duration` 为秒。具体参数与默认值见 demo 的 API 表格和导出的 Props 类型。
+Most component durations use milliseconds. `Marquee.duration` and `BorderBeam.duration` use seconds. See the demo API tables and exported Props types for parameters and defaults.
 
-`TransitionGroup` 直接接收带稳定 key 的 `Transition` 元素。删除业务数据时立即更新 state；可通过 `Transition.exit` 提供不含可交互表单的退场快照。`Expand`、`FlipCard` 的状态由调用方控制。
+`TransitionGroup` directly accepts `Transition` elements with stable keys. Update state immediately when removing business data; use `Transition.exit` to provide an exit snapshot without interactive form controls. `Expand` and `FlipCard` are controlled by the caller.
 
-## 独立发布
+## Publishing
 
 ```sh
 npm run typecheck
@@ -111,26 +113,82 @@ npm pack --dry-run
 npm pack
 ```
 
-打包前的 `prepack` 会自动检查类型并构建库。可以先在消费项目中安装生成的 `atelier-motion-0.1.0.tgz` 验证。
+The `prepack` hook checks types and builds the library automatically. Install the generated `atelier-motion-0.1.0.tgz` in a consumer project to validate it locally.
 
-准备公开发布时，先确认 npm 包名可用、版本号、账号权限以及源代码的发布许可，再执行：
+Before publishing publicly, verify package name availability, the version, account permissions, and permission to distribute the source. Then run:
 
 ```sh
 npm login
 npm publish --access public
 ```
 
-项目配置已允许公开发布。此仓库初始化不包含远程发布或 demo 部署操作。
+The project is configured for public publishing. Repository initialization did not publish the package or deploy the demo.
 
-## 迁移
+## Migration
 
-原组件调用方式不变，将导入包名从 `atelier-ui` 换为 `atelier-motion` 即可。原始 `atelier-ui` 仓库在本次抽离中未修改，现有消费者可逐步迁移。
+Replace imports from `atelier-ui` with `atelier-motion`; component usage stays the same. The original `atelier-ui` repository was not modified during extraction, so existing consumers can migrate gradually.
 
-## 内容与布局动画
+## Content and layout animations
 
-- `AutoSize` 用 `ResizeObserver` 测量内部自然高度，包括异步内容和换行变化。不要给外层设置固定高度，内容的留白应放在子元素中。不支持该 API 的环境保留自然高度。
-- `LayoutList` 通过 `getItemKey` 识别唯一、稳定的列表项，平滑移动纵向列表中的保留项。新增项立即显示，删除项立即移除；不包含拖拽、网格或退场保留。动画由组件管理列表项的 transform，请把自定义变换放在子元素上。不支持 Web Animations API 时直接更新布局。
-- `Ripple` 只接受一个原生 `button` 或 `a`，保留原元素的 ref、事件与属性。使用常规 children 内容，不支持 dangerouslySetInnerHTML。原生禁用、aria-disabled、主动关闭或减少动态效果时不播放涟漪；`Ripple.disabled` 只关闭效果，不禁用链接导航或按钮操作。调用方阻止默认事件时不播放涟漪。
-- `TextRotate` 默认每 2400ms 自动切换整句文案，可用 `paused`、`autoPlay` 控制；悬停与焦点暂停可避免干扰阅读。传入 `index` 后改为外部驱动，自动计时停止，`onIndexChange` 仅报告内部自动切换。索引循环归一化，空数组显示空内容，单条文案不创建计时器。辅助技术只读取当前文案，默认不主动播报；减少动态效果时保持切换并去除动画。
+- `AutoSize` uses `ResizeObserver` to measure natural content height, including asynchronous content and line wrapping. Do not set a fixed outer height; put content spacing on child elements. Environments without this API retain natural height.
+- `LayoutList` identifies items through unique, stable `getItemKey` values and smoothly moves retained items in a vertical list. New items appear immediately and removed items disappear immediately. Dragging, grids, and retained exit animations are outside its scope. The component manages item transforms; apply custom transforms to child elements. Without the Web Animations API, layout updates immediately.
+- `Ripple` accepts one native `button` or `a`, preserving its ref, events, and attributes. Use regular children; `dangerouslySetInnerHTML` is unsupported. Native disabled state, `aria-disabled`, disabled effects, and reduced motion suppress ripples. `Ripple.disabled` only disables the effect, not navigation or button actions. Preventing the original event's default behavior also suppresses the ripple.
+- `TextRotate` switches whole phrases every 2400ms by default, with `paused` and `autoPlay` controls. Hover and focus pauses help avoid interrupting reading. Passing `index` makes it controlled and stops automatic timing; `onIndexChange` only reports internal automatic changes. Indices wrap, empty arrays display no text, and a single phrase creates no timer. Assistive technology reads only the current phrase, with no live announcement by default. Reduced motion preserves phrase changes without animation.
 
-四个组件的 `duration` 与 `TextRotate.interval` 单位均为毫秒。无效时长回退到默认值，负时长视为零；`interval` 最小为 100ms。
+For these four components, `duration` and `TextRotate.interval` use milliseconds. Invalid durations fall back to defaults, negative durations become zero, and `interval` has a minimum of 100ms.
+
+## Automated tests
+
+After installing dependencies, download the browsers matching the locked test framework version:
+
+```sh
+npm ci
+npx playwright install chromium firefox webkit
+# For Linux CI: npx playwright install --with-deps chromium firefox webkit
+```
+
+```sh
+npm test                 # Unit, component, demo, and SSR tests
+npm run test:watch       # Vitest watch mode
+npm run test:coverage    # Unit tests and component source coverage thresholds
+npm run typecheck:tests  # Type-check components, demo, tests, and test configs
+npm run test:e2e         # Real-browser end-to-end tests
+npm run test:all         # Type checks → coverage → end-to-end tests
+```
+
+### Test scope
+
+| Test file | Coverage |
+| --- | --- |
+| `tests/behavior.test.tsx` | Controlled state, timers, transition callbacks, formatting, boundaries, list identity, ref and event preservation |
+| `tests/browser-apis.test.tsx` | Observer callbacks and cleanup, scroll progress, pointer movement and reset, reduced motion, animation timing |
+| `tests/edge-cases.test.tsx` | Repeated reordering and cancellation, removal cleanup, re-entry during exit, dynamic props, ripple coordinates and disabled combinations |
+| `tests/demo.test.tsx` | Two scenarios for all 35 components, code display, independent replay, FAQ, validation, and progress interactions |
+| `tests/ssr.test.tsx` | Server rendering of representative components in Node without browser APIs |
+| `tests/e2e/motion.spec.ts` | All component pages and horizontal overflow, keyboard ripples, actual list movement, form height, scroll progress and parallax, collapse focus and inert content |
+
+Unit tests use Vitest, React Testing Library, and jsdom. Browser APIs are mocked as needed and restored after each test. SSR tests run separately in Node. End-to-end tests use Playwright across desktop Chromium, mobile Chromium emulation, Firefox, and WebKit.
+
+Playwright starts a separate server at `127.0.0.1:4178`, which must be available. It does not reuse the regular development server on port 4100. Run one browser with `npm run test:e2e -- --project=chromium`.
+
+### Latest verification results
+
+Local verification on 2026-11-02:
+
+- All 91 unit, component, demo, and SSR tests passed across five Vitest test files.
+- All 24 end-to-end cases passed: six scenarios across four browser projects. The component-page scenario visits all 35 component pages.
+- `npm run typecheck:tests` passed.
+- Component source coverage: statements 97.16%, branches 87.81%, functions 96.18%, lines 98.81%.
+
+These numbers are a snapshot of that run. After subsequent changes, use freshly generated reports.
+
+### Coverage and reports
+
+Component source coverage thresholds are 90% statements, 80% branches, 90% functions, and 95% lines. Coverage excludes demo code, tests, and component entry files that only re-export modules. End-to-end tests do not contribute to these percentages.
+
+- Unit coverage report: `coverage/index.html`.
+- Browser test report: `playwright-report/index.html`; open it with `npx playwright show-report`.
+- Failed browser tests retain screenshots and traces in `test-results/`, accessible through the HTML report.
+- Generated reports are excluded from Git through `.gitignore`.
+
+Tests verify specific states, geometry, animation execution, and keyboard behavior. They do not replace pixel-level visual regression, comprehensive assistive technology checks, or testing on physical mobile devices. SSR currently covers representative components, not a hydration matrix for every exported component.
