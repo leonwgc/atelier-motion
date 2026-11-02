@@ -97,6 +97,6 @@ export const scenarioExamples = {
   spotlight: example('SpotlightScenario', '精选灵感卡片', '用较小的暖色光斑突出指针附近的内容。', demos.SpotlightScenario),
   progressRing: example('ProgressRingScenario', '每周任务目标', '完成任务驱动圆环，用自定义圆心显示完成项数。', demos.ProgressRingScenario),
   parallax: example('ParallaxScenario', '创作故事阅读', '滚动故事并切换视差开关，对比内容的位置变化。', demos.ParallaxScenario),
-  gradientText: example('GradientTextScenario', '自然主题活动标题', '对比绿色与金色搭配的静态渐变和流动渐变。', demos.GradientTextScenario),
+  gradientText: example('GradientTextScenario', '自然主题活动标题', '勾选后持续流动；未勾选时，点击重播可预览一次渐变。', demos.GradientTextScenario),
   imageReveal: example('ImageRevealScenario', '插画作品双列展示', '本地 SVG 插画从左右两侧错峰揭示，无需远程图片。', demos.ImageRevealScenario),
 } satisfies Record<AnimationPageId, ScenarioExample>;

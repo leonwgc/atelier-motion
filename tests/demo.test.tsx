@@ -55,3 +55,17 @@ it('重播任务场景不重置上传场景', () => {
   expect(screen.getByRole('progressbar', { name: '每周任务完成进度' })).toHaveAttribute('aria-valuenow', '40');
   expect(screen.getByRole('progressbar', { name: '品牌手册上传进度' })).toHaveAttribute('aria-valuenow', '84');
 });
+
+it('渐变标题重播保留开关选择，包括连续重播和关闭状态', () => {
+  render(<AnimationPage id="gradientText" />);
+  const scene = screen.getByRole('region', { name: /^场景 2/ });
+  const checkbox = within(scene).getByRole('checkbox');
+  fireEvent.click(checkbox);
+  for (let index = 0; index < 3; index++) {
+    fireEvent.click(within(scene).getByRole('button', { name: /重播动画/ }));
+    expect(within(scene).getByRole('checkbox')).toBeChecked();
+  }
+  fireEvent.click(within(scene).getByRole('checkbox'));
+  fireEvent.click(within(scene).getByRole('button', { name: /重播动画/ }));
+  expect(within(scene).getByRole('checkbox')).not.toBeChecked();
+});

@@ -166,6 +166,7 @@ npm run test:all         # Type checks → coverage → end-to-end tests
 | `tests/demo.test.tsx` | Two scenarios for all 35 components, code display, independent replay, FAQ, validation, and progress interactions |
 | `tests/ssr.test.tsx` | Server rendering of representative components in Node without browser APIs |
 | `tests/e2e/motion.spec.ts` | All component pages and horizontal overflow, keyboard ripples, actual list movement, form height, scroll progress and parallax, collapse focus and inert content |
+| `tests/e2e/form-layout.spec.ts` | All-demo control geometry, checkbox label alignment and activation, input sizes, and the 717px viewport regression |
 
 Unit tests use Vitest, React Testing Library, and jsdom. Browser APIs are mocked as needed and restored after each test. SSR tests run separately in Node. End-to-end tests use Playwright across desktop Chromium, mobile Chromium emulation, Firefox, and WebKit.
 

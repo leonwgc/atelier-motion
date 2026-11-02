@@ -166,6 +166,7 @@ npm run test:all         # 类型检查 → 覆盖率 → 端到端测试
 | `tests/demo.test.tsx` | 全部 35 个组件的双场景、代码展示、独立重播，以及 FAQ、输入校验、进度交互 |
 | `tests/ssr.test.tsx` | Node 环境无浏览器 API 时，代表性组件的服务端渲染 |
 | `tests/e2e/motion.spec.ts` | 全组件页面与横向溢出、键盘涟漪、真实列表位移、表单高度、滚动进度与视差、折叠焦点与 inert |
+| `tests/e2e/form-layout.spec.ts` | 全站控件尺寸、复选框与标签对齐及激活、输入控件布局、717px 视口回归 |
 
 单元测试使用 Vitest、React Testing Library 和 jsdom；按需模拟浏览器 API，测试结束后恢复。SSR 测试单独运行在 Node 环境。端到端测试使用 Playwright，在 Chromium 桌面、Chromium 移动端模拟、Firefox 和 WebKit 四个项目运行。
 
